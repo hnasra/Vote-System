@@ -1,1 +1,31 @@
+import tkinter as tk
+from candidate_menu import CandidateMenu
+
+class MainMenu(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        self.title("VOTING SYSTEM")
+        self.geometry("300x200")
+        self.create_widgets()
+
+    def create_widgets(self):
+        self.label = tk.Label(self, text="Voting System", font=("Arial", 14))
+        self.label.pack(pady=10)
+
+        self.start_voting_button = tk.Button(self, text="Start Voting", command=self.start_voting)
+        self.start_voting_button.pack(pady=5)
+
+        self.exit_button = tk.Button(self, text="Exit", command=self.quit)
+        self.exit_button.pack(pady=5)
+
+    def start_voting(self):
+        self.withdraw()
+        candidate_menu = CandidateMenu(self)
+        candidate_menu.mainloop()
+        self.deiconify()
+
+if __name__ == "__main__":
+    main_menu = MainMenu()
+    main_menu.mainloop()
+
 
