@@ -1,4 +1,5 @@
 import tkinter as tk
+
 class CandidateMenu(tk.Toplevel):
     def __init__(self, master):
         super().__init__(master)
@@ -9,13 +10,15 @@ class CandidateMenu(tk.Toplevel):
         self.voted_ids = set()
         self.create_widgets()
 
-    def validate_id(self, new_text):
+    def validate_id(self, new_text: str) -> bool:
+        """Validate the ID entered by the user."""
         if new_text.isdigit() or new_text == "":
             return True
         else:
             return False
 
     def create_widgets(self):
+        """Create GUI widgets for the candidate menu."""
         self.label = tk.Label(self, text="Candidate Menu", font=("Arial", 14))
         self.label.pack(pady=10)
 
@@ -40,14 +43,16 @@ class CandidateMenu(tk.Toplevel):
         self.exit_button = tk.Button(self, text="Exit Voting", command=self.exit_voting)
         self.exit_button.pack(pady=5)
 
-    def check_voted_id(self, voter_id):
+    def check_voted_id(self, voter_id: str) -> bool:
+        """Check if the given voter ID has already voted."""
         if voter_id in self.voted_ids:
             print("This ID has already voted.")
             return True
         else:
             return False
 
-    def vote(self, candidate):
+    def vote(self, candidate: str):
+        """Record a vote for the given candidate."""
         if not self.voted:
             voter_id = self.id_entry.get()
             if voter_id:
@@ -68,10 +73,6 @@ class CandidateMenu(tk.Toplevel):
             self.vote_status_label.update_idletasks()
 
     def exit_voting(self):
+        """Exit the voting process and returns to the main menu."""
         self.master.deiconify()
         self.destroy()
-
-    def exit_voting(self):
-        self.master.deiconify()
-        self.destroy()
-
